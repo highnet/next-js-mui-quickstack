@@ -6,25 +6,12 @@ import { lightTheme, darkTheme } from "@/theme";
 import PageLayout from "@/components/PageLayout";
 import ButtonAppBar from "@/components/ui/ButtonAppBar";
 import BottomNavigation from "@mui/material/BottomNavigation";
-import { ThemeProvider, useTheme } from "@/context/ThemeContext";
 import CssBaseline from "@mui/material/CssBaseline";
-import { useEffect } from "react";
+import { useThemeStore } from "@/stores/useThemeStore";
 
 function ThemedContent({ children }: { children: React.ReactNode }) {
-  const { isDarkMode } = useTheme();
+  const isDarkMode = useThemeStore((state) => state.isDarkMode);
   const theme = isDarkMode ? darkTheme : lightTheme;
-
-  useEffect(() => {
-    // Sync theme with CSS variables
-    document.documentElement.style.setProperty(
-      "--background",
-      theme.palette.background.default
-    );
-    document.documentElement.style.setProperty(
-      "--foreground",
-      theme.palette.mode === "light" ? "#171717" : "#ededed"
-    );
-  }, [isDarkMode, theme]);
 
   return (
     <MUIThemeProvider theme={theme}>
@@ -43,15 +30,13 @@ export default function ClientLayout({
     <html lang="en">
       <body className={`antialiased`}>
         <AppRouterCacheProvider>
-          <ThemeProvider>
-            <ThemedContent>
-              <PageLayout
-                header={<ButtonAppBar />}
-                main={children}
-                footer={<BottomNavigation />}
-              />
-            </ThemedContent>
-          </ThemeProvider>
+          <ThemedContent>
+            <PageLayout
+              header={<ButtonAppBar />}
+              main={children}
+              footer={<BottomNavigation />}
+            />
+          </ThemedContent>
         </AppRouterCacheProvider>
       </body>
     </html>

@@ -9,10 +9,11 @@ import MenuIcon from "@mui/icons-material/Menu";
 import Brightness4Icon from "@mui/icons-material/Brightness4";
 import Brightness7Icon from "@mui/icons-material/Brightness7";
 import Link from "next/link";
-import { useTheme } from "@/context/ThemeContext";
+import { useThemeStore } from "@/stores/useThemeStore";
 
 export default function ButtonAppBar() {
-  const { isDarkMode, toggleTheme } = useTheme();
+  const isDarkMode = useThemeStore((state) => state.isDarkMode);
+  const toggleTheme = useThemeStore((state) => state.toggleTheme);
 
   return (
     <Box sx={{ flexGrow: 1 }}>
