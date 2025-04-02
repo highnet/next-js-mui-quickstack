@@ -1,11 +1,38 @@
 "use client";
-import { createTheme } from "@mui/material/styles";
+import { createTheme, ThemeOptions } from "@mui/material/styles";
+import { PaletteMode } from "@mui/material";
 
-const theme = createTheme({
-  cssVariables: true,
+const getThemeOptions = (mode: PaletteMode): ThemeOptions => ({
   typography: {
     fontFamily: "var(--font-roboto)",
   },
+  palette: {
+    mode,
+    ...(mode === 'light'
+      ? {
+          background: {
+            default: '#ffffff',
+            paper: '#f5f5f5',
+          },
+        }
+      : {
+          background: {
+            default: '#0a0a0a',
+            paper: '#171717',
+          },
+        }),
+  },
+  components: {
+    MuiCssBaseline: {
+      styleOverrides: {
+        body: {
+          backgroundColor: mode === 'light' ? '#ffffff' : '#0a0a0a',
+          color: mode === 'light' ? '#171717' : '#ededed',
+        },
+      },
+    },
+  },
 });
 
-export default theme;
+export const lightTheme = createTheme(getThemeOptions("light"));
+export const darkTheme = createTheme(getThemeOptions("dark"));
