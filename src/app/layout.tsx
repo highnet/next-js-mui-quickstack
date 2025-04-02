@@ -3,6 +3,9 @@ import "./globals.css";
 import { AppRouterCacheProvider } from "@mui/material-nextjs/v15-appRouter";
 import { ThemeProvider } from "@mui/material/styles";
 import theme from "@/theme";
+import PageLayout from "@/components/PageLayout";
+import ButtonAppBar from "@/components/ui/ButtonAppBar";
+import BottomNavigation from "@mui/material/BottomNavigation";
 
 export const metadata: Metadata = {
   title: "MUI Next.js Quickstack",
@@ -19,9 +22,11 @@ export default function RootLayout({
       <body className={`antialiased`}>
         <AppRouterCacheProvider>
           <ThemeProvider theme={theme}>
-            <header></header>
-            <main>{children}</main>
-            <footer></footer>
+            <PageLayout
+              header={<ButtonAppBar />}
+              main={children}
+              footer={<BottomNavigation />}
+            />
           </ThemeProvider>
         </AppRouterCacheProvider>
       </body>
