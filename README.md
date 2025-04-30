@@ -22,8 +22,8 @@ This project provides a minimal setup to get React applications up and running q
 
 1.  Clone the repository:
     ```bash
-    git clone <your-repository-url>
-    cd <repository-directory>
+    git clone https://github.com/highnet/next-js-mui-quickstack.git
+    cd https://github.com/highnet/next-js-mui-quickstack.git
     ```
 2.  Install dependencies:
     ```bash
